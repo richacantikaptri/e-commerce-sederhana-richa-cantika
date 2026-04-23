@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toko tumbler Online</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">Richas's tumbler </div>
+            <ul class="nav-links">
+                <li><a href="#">Beranda</a></li>
+                <li><a href="#produk">Produk</a></li>
+                <li><a href="#">Kategori</a></li>
+                <li class="cart-nav" onclick="checkoutAlert()">
+                    <span id="cart-icon">🛒 Keranjang (<span id="cart-count">0</span>)</span>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Selamat Datang di Toko tumbler Online Richa's</h1>
+                <p>Koleksi tumbler eksklusif untuk gaya hidup modern Anda.</p>
+                <a href="#produk" class="btn-hero">Jelajahi Sekarang</a>
+            </div>
+        </section>
+
+        <section id="produk" class="container">
+            <h2 class="section-title">Produk Unggulan</h2>
+            <div class="product-grid">
+                
+                <article class="product-card">
+                    <img src="pink.jpg" alt="Minimalist pink">
+                    <h3>Minimalist pink</h3>
+                    <p class="price">Rp 1.550.000</p>
+                    <button class="btn-add" onclick="tambahKeKeranjang('Minimalist pink')">Tambah ke Keranjang</button>
+                </article>
+
+                <article class="product-card">
+                    <img src="black.jpg" alt="classic black">
+                    <h3>Classic black</h3>
+                    <p class="price">Rp 1.650.000</p>
+                    <button class="btn-add" onclick="tambahKeKeranjang('Classic black')">Tambah ke Keranjang</button>
+                </article>
+
+                <article class="product-card">
+                    <img src="white.jpg" alt="Minimalis white">
+                    <h3>Minimalis white</h3>
+                    <p class="price">Rp 1.050.000</p>
+                    <button class="btn-add" onclick="tambahKeKeranjang('minimalis white')">Tambah ke Keranjang</button>
+                </article>
+
+                <article class="product-card">
+                    <img src="red.jpg" alt="minimalis black">
+                    <h3>minimalis black</h3>
+                    <p class="price">Rp 1.450.000</p>
+                    <button class="btn-add" onclick="tambahKeKeranjang('minimalis black')">Tambah ke Keranjang</button>
+                </article>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-info">
+            <p>Kontak: richacantikap@gmail.com | +62 821 2059 0518</p>
+            <p>&copy; 2026 Richa Allshop | Richa - Administrasi Bisnis 3</p>
+        </div>
+    </footer>
+
+    <script>
+        let jumlahBarang = 0;
+
+        function tambahKeKeranjang(namaProduk) {
+            jumlahBarang++;
+            document.getElementById('cart-count').innerText = jumlahBarang;
+            alert(namaProduk + " telah ditambahkan ke keranjang!");
+        }
+
+        function checkoutAlert() {
+            if(jumlahBarang > 0) {
+                alert("Anda memiliki " + jumlahBarang + " produk. Lanjut ke proses Checkout?");
+            } else {
+                alert("Keranjang Anda masih kosong!");
+            }
+        }
+    </script>
+
+</body>
+</html>
