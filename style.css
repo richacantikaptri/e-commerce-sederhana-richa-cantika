@@ -8,9 +8,20 @@
     font-family:'Poppins',sans-serif;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     background:#FFFDF8;
     color:#5B4E4E;
+    overflow-x:hidden;
+    line-height:1.6;
+}
+
+img{
+    max-width:100%;
+    display:block;
 }
 
 /* ==========================
@@ -37,11 +48,13 @@ body{
 
 .nav-links{
     display:flex;
+    align-items:center;
     list-style:none;
+    gap:25px;
 }
 
 .nav-links li{
-    margin-left:25px;
+    list-style:none;
 }
 
 .nav-links a{
@@ -59,7 +72,8 @@ body{
    HERO
 ========================== */
 .hero{
-    height:45vh;
+    min-height:45vh;
+    padding:60px 20px;
     background:
     linear-gradient(rgba(255,250,250,.72),rgba(255,244,200,.60)),
     url('https://images.unsplash.com/photo-1508685096489-7aac291bd5b3?w=1200');
@@ -71,32 +85,50 @@ body{
     text-align:center;
 }
 
+.hero-content{
+    max-width:800px;
+}
+
 .hero-content h1{
     font-size:2.8rem;
     color:#B85C82;
-    margin-bottom:10px;
+    margin-bottom:15px;
 }
 
 .hero-content p{
     font-size:1rem;
     color:#7A6666;
+    margin-bottom:25px;
+}
+
+.btn-hero{
+    display:inline-block;
+    padding:12px 28px;
+    background:#F8AFC8;
+    color:#fff;
+    text-decoration:none;
+    border-radius:10px;
+    transition:.3s;
+}
+
+.btn-hero:hover{
+    background:#E58AAE;
 }
 
 /* ==========================
    CONTAINER
 ========================== */
 .container{
-    max-width:1100px;
-    margin:50px auto;
+    max-width:1200px;
+    margin:60px auto;
     padding:0 20px;
 }
 
 .section-title{
     text-align:center;
-    margin-bottom:35px;
+    margin-bottom:40px;
     font-size:2rem;
     color:#C56B8A;
-    font-family:'Playfair Display',serif;
 }
 
 /* ==========================
@@ -104,55 +136,57 @@ body{
 ========================== */
 .product-grid{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:28px;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
 }
 
 /* ==========================
-   CARD PRODUK
+   CARD
 ========================== */
 .product-card{
-    background:#FFFFFF;
+    background:#fff;
     border-radius:18px;
     padding:18px;
-    text-align:center;
     border:2px solid #FFE8EE;
     box-shadow:0 8px 20px rgba(0,0,0,.05);
-    transition:.35s;
+    transition:.3s;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
 }
 
 .product-card:hover{
     transform:translateY(-8px);
     box-shadow:0 15px 30px rgba(255,190,210,.35);
-    border-color:#FFD87A;
 }
 
 .product-card img{
     width:100%;
     height:220px;
     object-fit:contain;
+    background:#FFF8FA;
     border-radius:12px;
     margin-bottom:15px;
-    background:#FFF8FA;
 }
 
-/* ==========================
-   JUDUL PRODUK
-========================== */
 .product-card h3{
-    color:#5D4D4D;
     font-size:1.2rem;
     margin-bottom:8px;
+    color:#5D4D4D;
 }
 
-/* ==========================
-   HARGA
-========================== */
+.product-desc{
+    font-size:14px;
+    color:#777;
+    margin:10px 0;
+    flex:1;
+}
+
 .price{
     color:#D97A98;
-    font-size:1.15rem;
-    font-weight:700;
-    margin-bottom:18px;
+    font-size:1.1rem;
+    font-weight:bold;
+    margin:15px 0;
 }
 
 /* ==========================
@@ -165,15 +199,13 @@ body{
     border-radius:10px;
     background:linear-gradient(90deg,#F8AFC8,#FFE28A);
     color:#6B4A4A;
-    font-weight:600;
-    font-size:.95rem;
     cursor:pointer;
+    font-weight:600;
     transition:.3s;
 }
 
 .btn-add:hover{
     background:linear-gradient(90deg,#F59DBD,#FFD95A);
-    transform:scale(1.03);
 }
 
 /* ==========================
@@ -182,31 +214,115 @@ body{
 footer{
     margin-top:60px;
     background:linear-gradient(90deg,#FFDDE6,#FFF0B2);
-    color:#7A6666;
-    padding:30px;
     text-align:center;
-    font-size:.9rem;
+    padding:30px 20px;
+    color:#7A6666;
 }
 
 /* ==========================
-   RESPONSIVE
+   TABLET
 ========================== */
-@media(max-width:768px){
+@media (max-width:992px){
 
 .product-grid{
-    grid-template-columns:1fr;
+    grid-template-columns:repeat(2,1fr);
+}
+
+.hero-content h1{
+    font-size:2.2rem;
+}
+
+}
+
+/* ==========================
+   MOBILE
+========================== */
+@media (max-width:768px){
+
+.navbar{
+    flex-direction:column;
+    gap:15px;
+    padding:18px;
+}
+
+.logo{
+    font-size:1.6rem;
+}
+
+.nav-links{
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:15px;
+}
+
+.hero{
+    min-height:auto;
+    padding:60px 20px;
 }
 
 .hero-content h1{
     font-size:2rem;
 }
 
-.navbar{
+.hero-content p{
+    font-size:.95rem;
+}
+
+.product-grid{
+    grid-template-columns:1fr;
+}
+
+.product-card img{
+    height:220px;
+}
+
+.container{
+    padding:0 15px;
+}
+
+}
+
+/* ==========================
+   HP KECIL
+========================== */
+@media (max-width:480px){
+
+.logo{
+    font-size:1.4rem;
+}
+
+.hero{
+    padding:45px 15px;
+}
+
+.hero-content h1{
+    font-size:1.6rem;
+    line-height:1.4;
+}
+
+.hero-content p{
+    font-size:.9rem;
+}
+
+.section-title{
+    font-size:1.5rem;
+}
+
+.product-card{
     padding:15px;
 }
 
-.nav-links li{
-    margin-left:15px;
+.product-card img{
+    height:180px;
+}
+
+.btn-add{
+    font-size:.9rem;
+}
+
+footer{
+    font-size:.8rem;
+    padding:20px;
 }
 
 }
