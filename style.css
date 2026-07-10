@@ -7,8 +7,8 @@
 }
 
 body {
-    background-color: #fafafa;
-    color: #333;
+    background-color: #FDFBF9;
+    color: #4F4F4F;
 }
 
 /* NAVBAR */
@@ -17,7 +17,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 15px 5%;
-    background: #df9ece;
+    background: #F3E5E5;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     position: sticky;
     top: 0;
@@ -26,8 +26,8 @@ body {
 
 .logo {
     font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    color: #ecd4e6;
+    font-size: 1.6rem;
+    color: #8C6F6F;
     font-weight: bold;
 }
 
@@ -36,28 +36,48 @@ body {
     list-style: none;
 }
 
-.nav-links li { margin-left: 20px; }
-.nav-links a { text-decoration: none; color: #444; font-size: 0.85rem; }
+.nav-links li {
+    margin-left: 20px;
+}
 
-/* HERO SECTION (Sederhana) */
+.nav-links a {
+    text-decoration: none;
+    color: #5F5F5F;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #B88A8A;
+}
+
+/* HERO SECTION */
 .hero {
-    height: 40vh; /* Perkecil tinggi hero */
-    background: linear-gradient(rgba(247, 244, 244, 0.89), rgba(255, 197, 231, 0.733)), 
-                url('https://images.unsplash.com/photo-1508685096489-7aac291bd5b3?w=1200');
+    height: 40vh;
+    background:
+        linear-gradient(rgba(255,255,255,0.65), rgba(245,236,236,0.7)),
+        url('https://images.unsplash.com/photo-1508685096489-7aac291bd5b3?w=1200');
     background-size: cover;
     background-position: center;
     display: flex;
-    align-items: center;
     justify-content: center;
-    color: white;
+    align-items: center;
     text-align: center;
 }
 
-.hero-content h1 { font-size: 2.2rem; }
+.hero-content h1 {
+    font-size: 2.3rem;
+    color: #6F5B5B;
+}
 
-/* --- GRID PRODUK (PERBAIKAN UTAMA) --- */
+.hero-content p {
+    color: #7A7070;
+    margin-top: 10px;
+}
+
+/* CONTAINER */
 .container {
-    max-width: 900px; /* Batasi lebar keseluruhan produk */
+    max-width: 900px;
     margin: 40px auto;
     padding: 0 20px;
 }
@@ -67,86 +87,87 @@ body {
     margin-bottom: 30px;
     font-size: 1.8rem;
     font-family: 'Playfair Display', serif;
+    color: #7D6666;
 }
 
+/* GRID PRODUK */
 .product-grid {
     display: grid;
-    /* Tetap 2 kolom, tapi ukurannya menyesuaikan isi */
-    grid-template-columns: repeat(2, minmax(0, 1fr)); 
-    gap: 25px; /* Jarak antar kotak */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px;
 }
 
-/* Kartu Produk (PERBAIKAN UKURAN) */
+/* KARTU PRODUK */
 .product-card {
-    background: white;
-    padding: 15px; /* Kurangi padding dalam */
-    border-radius: 12px;
+    background: #FFFFFF;
+    padding: 15px;
+    border-radius: 15px;
     text-align: center;
+    border: 1px solid #EFE7E7;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.04);
     transition: 0.3s;
-    border: 1px solid #eee;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
-    overflow: hidden; /* Mencegah isi meluap */
+    overflow: hidden;
 }
 
 .product-card:hover {
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.08);
 }
 
-/* Gambar Produk (DIPERBAIKAN) */
+/* GAMBAR */
 .product-card img {
-    width: 100%; /* Lebar gambar mengikuti kotak */
-    height: 200px; /* Batasi tinggi gambar agar tidak besar */
-    object-fit: contain; /* Gambar akan proporsional tanpa terpotong/melar */
-    border-radius: 8px;
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 10px;
     margin-bottom: 15px;
 }
 
-/* Teks Produk (Sesuai Gambar) */
+/* JUDUL PRODUK */
 .product-card h3 {
     font-size: 1.1rem;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 5px;
+    color: #555;
+    margin-bottom: 8px;
 }
 
+/* HARGA */
 .price {
-    color: #0c0a0b;
+    color: #A27B7B;
+    font-size: 1.05rem;
     font-weight: 600;
-    font-size: 1rem;
     margin-bottom: 15px;
 }
 
-/* Tombol (Sesuai Gambar) */
+/* BUTTON */
 .btn-add {
     width: 100%;
     padding: 10px;
-    background: #634444; /* Warna gelap */
+    background: #C9B6B6;
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
     font-weight: 500;
-    font-size: 0.9rem;
-    transition: 0.2s;
+    transition: 0.3s;
 }
 
 .btn-add:hover {
-    background: #555;
+    background: #B89E9E;
 }
 
 /* FOOTER */
 footer {
-    background: #222;
-    color: #888;
+    background: #E8DDDD;
+    color: #6F6F6F;
     padding: 30px 20px;
     text-align: center;
     margin-top: 50px;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
 }
 
-/* Responsif HP */
+/* RESPONSIVE */
 @media (max-width: 600px) {
     .product-grid {
-        grid-template-columns: 1fr; /* Jadi 1 kolom di HP */
+        grid-template-columns: 1fr;
     }
 }
