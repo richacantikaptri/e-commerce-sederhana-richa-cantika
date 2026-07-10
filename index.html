@@ -6,6 +6,229 @@
     <title>Toko tumbler Online</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* ===== TAMBAHAN: STYLE UNTUK KERANJANG & CHECKOUT ===== */
+        .cart-nav { cursor: pointer; }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 360px;
+            max-width: 90vw;
+            height: 100%;
+            background: #fff;
+            box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+            z-index: 1000;
+            transition: right 0.35s ease;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Poppins', sans-serif;
+        }
+        .cart-sidebar.open { right: 0; }
+
+        .cart-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cart-header h2 { margin: 0; font-size: 18px; }
+        .cart-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+            color: #333;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px 20px;
+        }
+        .cart-empty {
+            text-align: center;
+            color: #999;
+            margin-top: 40px;
+            font-size: 14px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .cart-item-info { flex: 1; }
+        .cart-item-name { font-size: 14px; font-weight: 600; margin: 0 0 4px 0; }
+        .cart-item-price { font-size: 13px; color: #777; margin: 0; }
+
+        .cart-item-qty {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .qty-btn {
+            width: 24px;
+            height: 24px;
+            border: 1px solid #ccc;
+            background: #fafafa;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            line-height: 1;
+        }
+        .qty-btn:hover { background: #eee; }
+        .qty-value { min-width: 16px; text-align: center; font-size: 14px; }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: #e74c3c;
+            cursor: pointer;
+            font-size: 13px;
+            margin-left: 6px;
+        }
+
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid #eee;
+        }
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 14px;
+        }
+        .btn-checkout {
+            width: 100%;
+            padding: 12px;
+            background: #222;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        .btn-checkout:hover { background: #444; }
+        .btn-checkout:disabled { background: #ccc; cursor: not-allowed; }
+
+        .cart-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 999;
+            display: none;
+        }
+        .cart-overlay.open { display: block; }
+
+        /* Modal Checkout */
+        .checkout-modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .checkout-modal-overlay.open { display: flex; }
+
+        .checkout-modal {
+            background: #fff;
+            width: 420px;
+            max-width: 90vw;
+            max-height: 85vh;
+            overflow-y: auto;
+            border-radius: 10px;
+            padding: 24px;
+            font-family: 'Poppins', sans-serif;
+        }
+        .checkout-modal h2 { margin-top: 0; font-size: 18px; }
+        .checkout-modal label {
+            display: block;
+            font-size: 13px;
+            margin: 12px 0 4px;
+            color: #444;
+        }
+        .checkout-modal input,
+        .checkout-modal select {
+            width: 100%;
+            padding: 9px 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+        .checkout-summary {
+            margin-top: 16px;
+            padding: 12px;
+            background: #f8f8f8;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        .checkout-summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
+        }
+        .checkout-summary-total {
+            font-weight: 600;
+            font-size: 15px;
+            border-top: 1px solid #ddd;
+            margin-top: 6px;
+            padding-top: 8px;
+        }
+        .checkout-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 18px;
+        }
+        .btn-cancel-checkout {
+            flex: 1;
+            padding: 11px;
+            background: #eee;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn-confirm-checkout {
+            flex: 2;
+            padding: 11px;
+            background: #222;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn-confirm-checkout:hover { background: #444; }
+
+        .success-box {
+            text-align: center;
+            padding: 10px 0;
+        }
+        .success-box .icon { font-size: 42px; margin-bottom: 10px; }
+        .btn-close-success {
+            margin-top: 16px;
+            padding: 10px 20px;
+            background: #222;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
@@ -16,7 +239,7 @@
                 <li><a href="#">Beranda</a></li>
                 <li><a href="#produk">Produk</a></li>
                 <li><a href="#">Kategori</a></li>
-                <li class="cart-nav" onclick="checkoutAlert()">
+                <li class="cart-nav" onclick="bukaKeranjang()">
                     <span id="cart-icon">🛒 Keranjang (<span id="cart-count">0</span>)</span>
                 </li>
             </ul>
@@ -35,103 +258,103 @@
         <section id="produk" class="container">
             <h2 class="section-title">Produk Unggulan</h2>
             <div class="product-grid">
-                
+
                 <article class="product-card">
                     <img src="pink.jpeg" alt="Minimalist pink">
                     <h3>Minimalist pink</h3>
                     <p class="price">Rp 240.000</p>
-                    <button class="btn-add" onclick="tambahKeKeranjang('Minimalist pink')">Tambah ke Keranjang</button>
+                    <button class="btn-add" onclick="tambahKeKeranjang('Minimalist pink', 240000)">Tambah ke Keranjang</button>
                 </article>
 
                 <article class="product-card">
                     <img src="black.jpeg" alt="classic black">
                     <h3>Classic black</h3>
                     <p class="price">Rp 250.000</p>
-                    <button class="btn-add" onclick="tambahKeKeranjang('Classic black')">Tambah ke Keranjang</button>
+                    <button class="btn-add" onclick="tambahKeKeranjang('Classic black', 250000)">Tambah ke Keranjang</button>
                 </article>
 
                 <article class="product-card">
                     <img src="white.jpeg" alt="Minimalis white">
                     <h3>Minimalis white</h3>
                     <p class="price">Rp 300.000</p>
-                    <button class="btn-add" onclick="tambahKeKeranjang('minimalis white')">Tambah ke Keranjang</button>
+                    <button class="btn-add" onclick="tambahKeKeranjang('minimalis white', 300000)">Tambah ke Keranjang</button>
                 </article>
 
                 <article class="product-card">
                     <img src="red.jpeg" alt="red">
                     <h3>minimalis red</h3>
                     <p class="price">Rp 160.000</p>
-                    <button class="btn-add" onclick="tambahKeKeranjang('minimalis red')">Tambah ke Keranjang</button>
+                    <button class="btn-add" onclick="tambahKeKeranjang('minimalis red', 160000)">Tambah ke Keranjang</button>
                 </article>
 
                 <article class="product-card">
                     <img src="Butter Bloom.jpeg" alt="Butter Bloom">
                     <h3>Butter Bloom</h3>
                     <p class="price">Rp 150.000</p>
-                    <button class="btn-add" onclick="tambahKeKeranjang('Butter Bloom')">Tambah ke Keranjang</button>
+                    <button class="btn-add" onclick="tambahKeKeranjang('Butter Bloom', 150000)">Tambah ke Keranjang</button>
                 </article>
 
-                 <article class="product-card">
+                <article class="product-card">
                     <img src="Tumbler daily.jpeg" alt="Tumbler daily">
                     <h3>Tumbler daily</h3>
                     <p class="price">Rp 150.000</p>
-                    <button class="btn-add" onclick="tambahKeKeranjang('Tumbler daily')">Tambah ke Keranjang</button>
+                    <button class="btn-add" onclick="tambahKeKeranjang('Tumbler daily', 150000)">Tambah ke Keranjang</button>
                 </article>
 
-                 <article class="product-card">
+                <article class="product-card">
                     <img src="Urban Bottle.jpeg" alt="Urban Bottle">
                     <h3>Urban Bottle</h3>
                     <p class="price">Rp 250.000</p>
-                    <button class="btn-add" onclick="tambahKeKeranjang('Urban Bottle')">Tambah ke Keranjang</button>
+                    <button class="btn-add" onclick="tambahKeKeranjang('Urban Bottle', 250000)">Tambah ke Keranjang</button>
                 </article>
 
-                 <article class="product-card">
+                <article class="product-card">
                     <img src="Flow Bottle.jpeg" alt="Flow Bottle">
                     <h3>Flow Bottle</h3>
                     <p class="price">Rp 140.000</p>
-                    <button class="btn-add" onclick="tambahKeKeranjang('Flow Bottle')">Tambah ke Keranjang</button>
+                    <button class="btn-add" onclick="tambahKeKeranjang('Flow Bottle', 140000)">Tambah ke Keranjang</button>
                 </article>
 
-                 <article class="product-card">
+                <article class="product-card">
                     <img src="Breeze Bottle.jpeg" alt="Breeze Bottle">
                     <h3>Breeze Bottle</h3>
                     <p class="price">Rp 180.000</p>
-                    <button class="btn-add" onclick="tambahKeKeranjang('Breeze Bottle')">Tambah ke Keranjang</button>
+                    <button class="btn-add" onclick="tambahKeKeranjang('Breeze Bottle', 180000)">Tambah ke Keranjang</button>
                 </article>
 
-                 <article class="product-card">
+                <article class="product-card">
                     <img src="Motion Bottle.jpeg" alt="Motion Bottle">
                     <h3>Motion Bottle</h3>
                     <p class="price">Rp 150.000</p>
-                    <button class="btn-add" onclick="tambahKeKeranjang('Motion Bottle')">Tambah ke Keranjang</button>
+                    <button class="btn-add" onclick="tambahKeKeranjang('Motion Bottle', 150000)">Tambah ke Keranjang</button>
                 </article>
 
                 <article class="product-card">
                     <img src="Luna Bottle.jpeg" alt="Luna Bottle">
                     <h3>Luna Bottle</h3>
                     <p class="price">Rp 200.000</p>
-                    <button class="btn-add" onclick="tambahKeKeranjang('Luna Bottle')">Tambah ke Keranjang</button>
+                    <button class="btn-add" onclick="tambahKeKeranjang('Luna Bottle', 200000)">Tambah ke Keranjang</button>
                 </article>
 
                 <article class="product-card">
                     <img src="Pink Gradient Bottle.jpeg" alt="Pink Gradient Bottle">
                     <h3>Pink Gradient Bottle</h3>
                     <p class="price">Rp 300.000</p>
-                    <button class="btn-add" onclick="tambahKeKeranjang('Pink Gradient Bottle')">Tambah ke Keranjang</button>
+                    <button class="btn-add" onclick="tambahKeKeranjang('Pink Gradient Bottle', 300000)">Tambah ke Keranjang</button>
                 </article>
 
                 <article class="product-card">
                     <img src="Grey Series.jpeg" alt="Grey Series">
                     <h3>Grey Series</h3>
                     <p class="price">Rp 280.000</p>
-                    <button class="btn-add" onclick="tambahKeKeranjang('Grey Series')">Tambah ke Keranjang</button>
+                    <button class="btn-add" onclick="tambahKeKeranjang('Grey Series', 280000)">Tambah ke Keranjang</button>
                 </article>
 
                 <article class="product-card">
                     <img src="Glow Bottle.jpeg" alt="Glow Bottle">
                     <h3>Glow Bottle </h3>
                     <p class="price">Rp 250.000</p>
-                    <button class="btn-add" onclick="tambahKeKeranjang('Glow Bottle')">Tambah ke Keranjang</button>
+                    <button class="btn-add" onclick="tambahKeKeranjang('Glow Bottle', 250000)">Tambah ke Keranjang</button>
                 </article>
 
             </div>
@@ -145,21 +368,208 @@
         </div>
     </footer>
 
-    <script>
-        let jumlahBarang = 0;
+    <!-- ===== TAMBAHAN: SIDEBAR KERANJANG ===== -->
+    <div class="cart-overlay" id="cartOverlay" onclick="tutupKeranjang()"></div>
+    <aside class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>Keranjang Belanja</h2>
+            <button class="cart-close" onclick="tutupKeranjang()">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItemsContainer">
+            <p class="cart-empty">Keranjang Anda masih kosong.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total</span>
+                <span id="cartTotalPrice">Rp 0</span>
+            </div>
+            <button class="btn-checkout" id="btnCheckout" onclick="bukaCheckout()" disabled>Checkout</button>
+        </div>
+    </aside>
 
-        function tambahKeKeranjang(namaProduk) {
-            jumlahBarang++;
-            document.getElementById('cart-count').innerText = jumlahBarang;
-            alert(namaProduk + " telah ditambahkan ke keranjang!");
+    <!-- ===== TAMBAHAN: MODAL CHECKOUT ===== -->
+    <div class="checkout-modal-overlay" id="checkoutOverlay">
+        <div class="checkout-modal" id="checkoutModalContent">
+            <!-- Diisi otomatis oleh JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        /* ===================================================
+           SISTEM KERANJANG & CHECKOUT
+           =================================================== */
+
+        // Struktur: [{ nama, harga, jumlah }]
+        let keranjang = [];
+
+        function formatRupiah(angka) {
+            return "Rp " + angka.toLocaleString('id-ID');
         }
 
-        function checkoutAlert() {
-            if(jumlahBarang > 0) {
-                alert("Anda memiliki " + jumlahBarang + " produk. Lanjut ke proses Checkout?");
+        function tambahKeKeranjang(namaProduk, harga) {
+            const itemAda = keranjang.find(item => item.nama === namaProduk);
+            if (itemAda) {
+                itemAda.jumlah++;
             } else {
-                alert("Keranjang Anda masih kosong!");
+                keranjang.push({ nama: namaProduk, harga: harga, jumlah: 1 });
             }
+            renderKeranjang();
+            bukaKeranjang();
+        }
+
+        function ubahJumlah(namaProduk, perubahan) {
+            const item = keranjang.find(i => i.nama === namaProduk);
+            if (!item) return;
+            item.jumlah += perubahan;
+            if (item.jumlah <= 0) {
+                keranjang = keranjang.filter(i => i.nama !== namaProduk);
+            }
+            renderKeranjang();
+        }
+
+        function hapusItem(namaProduk) {
+            keranjang = keranjang.filter(i => i.nama !== namaProduk);
+            renderKeranjang();
+        }
+
+        function hitungTotalBarang() {
+            return keranjang.reduce((total, item) => total + item.jumlah, 0);
+        }
+
+        function hitungTotalHarga() {
+            return keranjang.reduce((total, item) => total + (item.harga * item.jumlah), 0);
+        }
+
+        function renderKeranjang() {
+            // Update ikon jumlah di navbar
+            document.getElementById('cart-count').innerText = hitungTotalBarang();
+
+            const container = document.getElementById('cartItemsContainer');
+            const btnCheckout = document.getElementById('btnCheckout');
+
+            if (keranjang.length === 0) {
+                container.innerHTML = '<p class="cart-empty">Keranjang Anda masih kosong.</p>';
+                btnCheckout.disabled = true;
+            } else {
+                container.innerHTML = keranjang.map(item => `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <p class="cart-item-name">${item.nama}</p>
+                            <p class="cart-item-price">${formatRupiah(item.harga)}</p>
+                        </div>
+                        <div class="cart-item-qty">
+                            <button class="qty-btn" onclick="ubahJumlah('${item.nama}', -1)">-</button>
+                            <span class="qty-value">${item.jumlah}</span>
+                            <button class="qty-btn" onclick="ubahJumlah('${item.nama}', 1)">+</button>
+                        </div>
+                        <button class="cart-item-remove" onclick="hapusItem('${item.nama}')">Hapus</button>
+                    </div>
+                `).join('');
+                btnCheckout.disabled = false;
+            }
+
+            document.getElementById('cartTotalPrice').innerText = formatRupiah(hitungTotalHarga());
+        }
+
+        function bukaKeranjang() {
+            document.getElementById('cartSidebar').classList.add('open');
+            document.getElementById('cartOverlay').classList.add('open');
+        }
+
+        function tutupKeranjang() {
+            document.getElementById('cartSidebar').classList.remove('open');
+            document.getElementById('cartOverlay').classList.remove('open');
+        }
+
+        /* ===================== CHECKOUT ===================== */
+
+        function bukaCheckout() {
+            if (keranjang.length === 0) return;
+
+            const modal = document.getElementById('checkoutModalContent');
+            const ongkir = 15000;
+            const subtotal = hitungTotalHarga();
+            const totalAkhir = subtotal + ongkir;
+
+            modal.innerHTML = `
+                <h2>Checkout Pesanan</h2>
+
+                <label for="namaPembeli">Nama Lengkap</label>
+                <input type="text" id="namaPembeli" placeholder="Masukkan nama Anda">
+
+                <label for="alamatPembeli">Alamat Pengiriman</label>
+                <input type="text" id="alamatPembeli" placeholder="Masukkan alamat lengkap">
+
+                <label for="noHpPembeli">No. HP / WhatsApp</label>
+                <input type="text" id="noHpPembeli" placeholder="Contoh: 08123456789">
+
+                <label for="metodeBayar">Metode Pembayaran</label>
+                <select id="metodeBayar">
+                    <option value="Transfer Bank">Transfer Bank</option>
+                    <option value="COD">COD (Bayar di Tempat)</option>
+                    <option value="E-Wallet">E-Wallet (OVO/DANA/GoPay)</option>
+                </select>
+
+                <div class="checkout-summary">
+                    ${keranjang.map(item => `
+                        <div class="checkout-summary-row">
+                            <span>${item.nama} x${item.jumlah}</span>
+                            <span>${formatRupiah(item.harga * item.jumlah)}</span>
+                        </div>
+                    `).join('')}
+                    <div class="checkout-summary-row">
+                        <span>Ongkos Kirim</span>
+                        <span>${formatRupiah(ongkir)}</span>
+                    </div>
+                    <div class="checkout-summary-row checkout-summary-total">
+                        <span>Total Bayar</span>
+                        <span>${formatRupiah(totalAkhir)}</span>
+                    </div>
+                </div>
+
+                <div class="checkout-actions">
+                    <button class="btn-cancel-checkout" onclick="tutupCheckout()">Batal</button>
+                    <button class="btn-confirm-checkout" onclick="konfirmasiCheckout(${totalAkhir})">Buat Pesanan</button>
+                </div>
+            `;
+
+            document.getElementById('checkoutOverlay').classList.add('open');
+        }
+
+        function tutupCheckout() {
+            document.getElementById('checkoutOverlay').classList.remove('open');
+        }
+
+        function konfirmasiCheckout(totalAkhir) {
+            const nama = document.getElementById('namaPembeli').value.trim();
+            const alamat = document.getElementById('alamatPembeli').value.trim();
+            const noHp = document.getElementById('noHpPembeli').value.trim();
+
+            if (!nama || !alamat || !noHp) {
+                alert('Mohon lengkapi nama, alamat, dan no. HP terlebih dahulu.');
+                return;
+            }
+
+            const modal = document.getElementById('checkoutModalContent');
+            modal.innerHTML = `
+                <div class="success-box">
+                    <div class="icon">✅</div>
+                    <h2>Pesanan Berhasil Dibuat!</h2>
+                    <p>Terima kasih, <strong>${nama}</strong>. Pesanan Anda senilai <strong>${formatRupiah(totalAkhir)}</strong> akan segera diproses dan dikirim ke:</p>
+                    <p>${alamat}</p>
+                    <p>Kami akan menghubungi Anda di ${noHp} untuk konfirmasi.</p>
+                    <button class="btn-close-success" onclick="selesaiCheckout()">Tutup</button>
+                </div>
+            `;
+
+            // Kosongkan keranjang setelah checkout berhasil
+            keranjang = [];
+            renderKeranjang();
+        }
+
+        function selesaiCheckout() {
+            tutupCheckout();
+            tutupKeranjang();
         }
     </script>
 
