@@ -334,6 +334,27 @@
             outline: none;
             border-color: #222;
         }
+
+        /* ===== TAMBAHAN: STYLE UNTUK KOTAK PENCARIAN PRODUK ===== */
+        .search-box {
+            display: flex;
+            justify-content: center;
+            margin: 0 0 20px 0;
+        }
+        .search-input {
+            width: 100%;
+            max-width: 420px;
+            padding: 11px 18px;
+            border: 1px solid #ccc;
+            border-radius: 22px;
+            font-size: 14px;
+            font-family: inherit;
+            background: #fff;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: #222;
+        }
     </style>
 </head>
 <body>
@@ -365,6 +386,11 @@
 
         <section id="produk" class="container">
             <h2 class="section-title">Produk Unggulan</h2>
+
+            <!-- ===== TAMBAHAN: KOTAK PENCARIAN PRODUK ===== -->
+            <div class="search-box">
+                <input type="text" id="searchInput" class="search-input" placeholder="Cari nama tumbler..." oninput="cariProduk()">
+            </div>
 
             <!-- ===== FILTER KATEGORI: SEDOTAN / BIASA ===== -->
             <div class="category-filter" id="kategori-filter">
@@ -730,6 +756,41 @@
             produkList.forEach(card => {
                 const kategoriProduk = card.getAttribute('data-kategori');
                 if (kategori === 'semua' || kategoriProduk === kategori) {
+                    card.classList.remove('hidden-item');
+                    jumlahTampil++;
+                } else {
+                    card.classList.add('hidden-item');
+                }
+            });
+
+            document.getElementById('noProductMsg').style.display = jumlahTampil === 0 ? 'block' : 'none';
+        }
+
+        /* ===================================================
+           TAMBAHAN: SISTEM PENCARIAN PRODUK (SEARCH)
+           Pencarian ini otomatis mengikuti kategori yang
+           sedang aktif dipilih, jadi bisa dipakai bersamaan
+           dengan filter kategori tanpa mengubah fungsi
+           filterKategori yang sudah ada.
+           =================================================== */
+        function cariProduk() {
+            const inputEl = document.getElementById('searchInput');
+            const keyword = inputEl ? inputEl.value.toLowerCase().trim() : '';
+
+            const activeBtn = document.querySelector('.category-btn.active');
+            const kategoriAktif = activeBtn ? activeBtn.getAttribute('data-kategori') : 'semua';
+
+            const produkList = document.querySelectorAll('#productGrid .product-card');
+            let jumlahTampil = 0;
+
+            produkList.forEach(card => {
+                const namaProduk = card.querySelector('h3').innerText.toLowerCase();
+                const kategoriProduk = card.getAttribute('data-kategori');
+
+                const cocokKategori = (kategoriAktif === 'semua' || kategoriProduk === kategoriAktif);
+                const cocokKeyword = namaProduk.includes(keyword);
+
+                if (cocokKategori && cocokKeyword) {
                     card.classList.remove('hidden-item');
                     jumlahTampil++;
                 } else {
