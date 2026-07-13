@@ -238,7 +238,7 @@
             min-height: 36px;
         }
 
-        /* ===== TAMBAHAN: STYLE UNTUK FILTER KATEGORI (BERDASARKAN BENTUK) ===== */
+        /* ===== STYLE UNTUK FILTER KATEGORI (SEDOTAN / BIASA) ===== */
         .category-filter {
             display: flex;
             flex-wrap: wrap;
@@ -291,7 +291,7 @@
             display: none;
         }
 
-        /* ===== TAMBAHAN: STYLE UNTUK STOK BARANG ===== */
+        /* ===== STYLE UNTUK STOK BARANG ===== */
         .stock-info {
             font-size: 12.5px;
             font-weight: 600;
@@ -337,20 +337,18 @@
         <section id="produk" class="container">
             <h2 class="section-title">Produk Unggulan</h2>
 
-            <!-- ===== FILTER KATEGORI BERDASARKAN BENTUK TUMBLER ===== -->
+            <!-- ===== FILTER KATEGORI: SEDOTAN / BIASA ===== -->
             <div class="category-filter" id="kategori-filter">
                 <button class="category-btn active" data-kategori="semua" onclick="filterKategori('semua', this)">Semua</button>
-                <button class="category-btn" data-kategori="ramping" onclick="filterKategori('ramping', this)">Ramping</button>
-                <button class="category-btn" data-kategori="bulat" onclick="filterKategori('bulat', this)">Bulat / Klasik</button>
-                <button class="category-btn" data-kategori="kotak" onclick="filterKategori('kotak', this)">Kotak</button>
-                <button class="category-btn" data-kategori="sport" onclick="filterKategori('sport', this)">Sport / Sedotan</button>
+                <button class="category-btn" data-kategori="sedotan" onclick="filterKategori('sedotan', this)">Tumbler Sedotan</button>
+                <button class="category-btn" data-kategori="biasa" onclick="filterKategori('biasa', this)">Tumbler Biasa</button>
             </div>
 
             <div class="product-grid" id="productGrid">
 
-                <article class="product-card" data-kategori="ramping" data-stok="50">
+                <article class="product-card" data-kategori="biasa" data-stok="50">
                     <img src="pink.jpeg" alt="Minimalist pink">
-                    <span class="category-tag">Ramping</span>
+                    <span class="category-tag">Tumbler Biasa</span>
                     <h3>Minimalist pink</h3>
                     <p class="price">Rp 240.000</p>
                     <p class="product-desc">Tumbler warna pink lembut dengan desain minimalis, cocok untuk menemani aktivitas harian Anda.</p>
@@ -358,9 +356,9 @@
                     <button class="btn-add" id="btn-minimalist-pink" onclick="tambahKeKeranjang('Minimalist pink', 240000)">Tambah ke Keranjang</button>
                 </article>
 
-                <article class="product-card" data-kategori="bulat" data-stok="60">
+                <article class="product-card" data-kategori="biasa" data-stok="60">
                     <img src="black.jpeg" alt="classic black">
-                    <span class="category-tag">Bulat / Klasik</span>
+                    <span class="category-tag">Tumbler Biasa</span>
                     <h3>Classic black</h3>
                     <p class="price">Rp 250.000</p>
                     <p class="product-desc">Warna hitam elegan dan netral, tampil klasik dan cocok untuk pria maupun wanita.</p>
@@ -368,9 +366,9 @@
                     <button class="btn-add" id="btn-classic-black" onclick="tambahKeKeranjang('Classic black', 250000)">Tambah ke Keranjang</button>
                 </article>
 
-                <article class="product-card" data-kategori="ramping" data-stok="35">
+                <article class="product-card" data-kategori="biasa" data-stok="35">
                     <img src="white.jpeg" alt="Minimalis white">
-                    <span class="category-tag">Ramping</span>
+                    <span class="category-tag">Tumbler Biasa</span>
                     <h3>Minimalis white</h3>
                     <p class="price">Rp 300.000</p>
                     <p class="product-desc">Desain putih bersih dan simpel, tampil rapi dan mudah dipadukan dengan gaya apapun.</p>
@@ -378,9 +376,9 @@
                     <button class="btn-add" id="btn-minimalis-white" onclick="tambahKeKeranjang('minimalis white', 300000)">Tambah ke Keranjang</button>
                 </article>
 
-                <article class="product-card" data-kategori="ramping" data-stok="20">
+                <article class="product-card" data-kategori="biasa" data-stok="20">
                     <img src="red.jpeg" alt="red">
-                    <span class="category-tag">Ramping</span>
+                    <span class="category-tag">Tumbler Biasa</span>
                     <h3>minimalis red</h3>
                     <p class="price">Rp 160.000</p>
                     <p class="product-desc">Tumbler merah cerah dengan tampilan minimalis, memberi kesan energik dan berani.</p>
@@ -388,9 +386,9 @@
                     <button class="btn-add" id="btn-minimalis-red" onclick="tambahKeKeranjang('minimalis red', 160000)">Tambah ke Keranjang</button>
                 </article>
 
-                <article class="product-card" data-kategori="bulat" data-stok="45">
+                <article class="product-card" data-kategori="biasa" data-stok="45">
                     <img src="Butter Bloom.jpeg" alt="Butter Bloom">
-                    <span class="category-tag">Bulat / Klasik</span>
+                    <span class="category-tag">Tumbler Biasa</span>
                     <h3>Butter Bloom</h3>
                     <p class="price">Rp 150.000</p>
                     <p class="product-desc">Warna kuning lembut ala butter yang manis, cocok untuk menambah keceriaan harimu.</p>
@@ -398,9 +396,9 @@
                     <button class="btn-add" id="btn-butter-bloom" onclick="tambahKeKeranjang('Butter Bloom', 150000)">Tambah ke Keranjang</button>
                 </article>
 
-                <article class="product-card" data-kategori="bulat" data-stok="70">
+                <article class="product-card" data-kategori="sedotan" data-stok="70">
                     <img src="Tumbler daily.jpeg" alt="Tumbler daily">
-                    <span class="category-tag">Bulat / Klasik</span>
+                    <span class="category-tag">Tumbler Sedotan</span>
                     <h3>Tumbler daily</h3>
                     <p class="price">Rp 150.000</p>
                     <p class="product-desc">Tumbler serbaguna untuk pemakaian sehari-hari, ringan dan praktis dibawa kemana saja.</p>
@@ -408,9 +406,9 @@
                     <button class="btn-add" id="btn-tumbler-daily" onclick="tambahKeKeranjang('Tumbler daily', 150000)">Tambah ke Keranjang</button>
                 </article>
 
-                <article class="product-card" data-kategori="kotak" data-stok="15">
+                <article class="product-card" data-kategori="biasa" data-stok="15">
                     <img src="Urban Bottle.jpeg" alt="Urban Bottle">
-                    <span class="category-tag">Kotak</span>
+                    <span class="category-tag">Tumbler Biasa</span>
                     <h3>Urban Bottle</h3>
                     <p class="price">Rp 250.000</p>
                     <p class="product-desc">Desain kekinian bergaya urban, pas untuk kamu yang aktif beraktivitas di kota.</p>
@@ -418,9 +416,9 @@
                     <button class="btn-add" id="btn-urban-bottle" onclick="tambahKeKeranjang('Urban Bottle', 250000)">Tambah ke Keranjang</button>
                 </article>
 
-                <article class="product-card" data-kategori="ramping" data-stok="55">
+                <article class="product-card" data-kategori="sedotan" data-stok="55">
                     <img src="Flow Bottle.jpeg" alt="Flow Bottle">
-                    <span class="category-tag">Ramping</span>
+                    <span class="category-tag">Tumbler Sedotan</span>
                     <h3>Flow Bottle</h3>
                     <p class="price">Rp 140.000</p>
                     <p class="product-desc">Bentuk ramping dan mengalir, nyaman digenggam dan ringan untuk dibawa bepergian.</p>
@@ -428,9 +426,9 @@
                     <button class="btn-add" id="btn-flow-bottle" onclick="tambahKeKeranjang('Flow Bottle', 140000)">Tambah ke Keranjang</button>
                 </article>
 
-                <article class="product-card" data-kategori="bulat" data-stok="40">
+                <article class="product-card" data-kategori="biasa" data-stok="40">
                     <img src="Breeze Bottle.jpeg" alt="Breeze Bottle">
-                    <span class="category-tag">Bulat / Klasik</span>
+                    <span class="category-tag">Tumbler Biasa</span>
                     <h3>Breeze Bottle</h3>
                     <p class="price">Rp 180.000</p>
                     <p class="product-desc">Warna segar seperti angin sepoi-sepoi, cocok untuk gaya hidup santai dan aktif.</p>
@@ -438,9 +436,9 @@
                     <button class="btn-add" id="btn-breeze-bottle" onclick="tambahKeKeranjang('Breeze Bottle', 180000)">Tambah ke Keranjang</button>
                 </article>
 
-                <article class="product-card" data-kategori="sport" data-stok="25">
+                <article class="product-card" data-kategori="sedotan" data-stok="25">
                     <img src="Motion Bottle.jpeg" alt="Motion Bottle">
-                    <span class="category-tag">Sport / Sedotan</span>
+                    <span class="category-tag">Tumbler Sedotan</span>
                     <h3>Motion Bottle</h3>
                     <p class="price">Rp 150.000</p>
                     <p class="product-desc">Didesain untuk menemani aktivitas olahraga dan gerak aktif Anda sepanjang hari.</p>
@@ -448,9 +446,9 @@
                     <button class="btn-add" id="btn-motion-bottle" onclick="tambahKeKeranjang('Motion Bottle', 150000)">Tambah ke Keranjang</button>
                 </article>
 
-                <article class="product-card" data-kategori="bulat" data-stok="65">
+                <article class="product-card" data-kategori="biasa" data-stok="65">
                     <img src="Luna Bottle.jpeg" alt="Luna Bottle">
-                    <span class="category-tag">Bulat / Klasik</span>
+                    <span class="category-tag">Tumbler Biasa</span>
                     <h3>Luna Bottle</h3>
                     <p class="price">Rp 200.000</p>
                     <p class="product-desc">Terinspirasi dari bulan, tampil lembut dan menenangkan dengan sentuhan warna manis.</p>
@@ -458,9 +456,9 @@
                     <button class="btn-add" id="btn-luna-bottle" onclick="tambahKeKeranjang('Luna Bottle', 200000)">Tambah ke Keranjang</button>
                 </article>
 
-                <article class="product-card" data-kategori="ramping" data-stok="30">
+                <article class="product-card" data-kategori="biasa" data-stok="30">
                     <img src="Pink Gradient Bottle.jpeg" alt="Pink Gradient Bottle">
-                    <span class="category-tag">Ramping</span>
+                    <span class="category-tag">Tumbler Biasa</span>
                     <h3>Pink Gradient Bottle</h3>
                     <p class="price">Rp 300.000</p>
                     <p class="product-desc">Gradasi warna pink yang cantik, memberikan kesan feminin dan elegan.</p>
@@ -468,9 +466,9 @@
                     <button class="btn-add" id="btn-pink-gradient-bottle" onclick="tambahKeKeranjang('Pink Gradient Bottle', 300000)">Tambah ke Keranjang</button>
                 </article>
 
-                <article class="product-card" data-kategori="kotak" data-stok="10">
+                <article class="product-card" data-kategori="biasa" data-stok="10">
                     <img src="Grey Series.jpeg" alt="Grey Series">
-                    <span class="category-tag">Kotak</span>
+                    <span class="category-tag">Tumbler Biasa</span>
                     <h3>Grey Series</h3>
                     <p class="price">Rp 280.000</p>
                     <p class="product-desc">Warna abu-abu netral dan modern, cocok untuk tampilan profesional maupun kasual.</p>
@@ -478,9 +476,9 @@
                     <button class="btn-add" id="btn-grey-series" onclick="tambahKeKeranjang('Grey Series', 280000)">Tambah ke Keranjang</button>
                 </article>
 
-                <article class="product-card" data-kategori="bulat" data-stok="0">
+                <article class="product-card" data-kategori="biasa" data-stok="0">
                     <img src="Glow Bottle.jpeg" alt="Glow Bottle">
-                    <span class="category-tag">Bulat / Klasik</span>
+                    <span class="category-tag">Tumbler Biasa</span>
                     <h3>Glow Bottle </h3>
                     <p class="price">Rp 250.000</p>
                     <p class="product-desc">Tampilan mengilap dan berkilau, membuat tumbler ini tampak lebih premium dan menarik.</p>
@@ -530,8 +528,6 @@
     <script>
         /* ===================================================
            MAPPING NAMA PRODUK -> ID ELEMEN STOK/TOMBOL
-           (Ditambahkan supaya fitur stok bisa update tampilan
-           tanpa mengubah kode HTML produk yang sudah ada)
            =================================================== */
         const stokElementId = {
             'Minimalist pink': 'minimalist-pink',
@@ -549,10 +545,6 @@
             'Grey Series': 'grey-series',
             'Glow Bottle': 'glow-bottle'
         };
-
-        function ambilCardByNama(namaProduk) {
-            return document.querySelector(`#productGrid .product-card h3`); // fallback tidak dipakai
-        }
 
         function updateTampilanStok(namaProduk) {
             const cards = document.querySelectorAll('#productGrid .product-card');
@@ -585,7 +577,7 @@
         }
 
         /* ===================================================
-           SISTEM FILTER KATEGORI (BERDASARKAN BENTUK)
+           SISTEM FILTER KATEGORI (SEDOTAN / BIASA)
            =================================================== */
         function filterKategori(kategori, btnEl) {
             document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
@@ -618,7 +610,6 @@
         }
 
         function tambahKeKeranjang(namaProduk, harga) {
-            // Cek stok tersedia sebelum menambah ke keranjang
             const cards = document.querySelectorAll('#productGrid .product-card');
             let cardTarget = null;
             cards.forEach(card => {
@@ -641,7 +632,6 @@
                 keranjang.push({ nama: namaProduk, harga: harga, jumlah: 1 });
             }
 
-            // Kurangi stok tampilan (stok dianggap "dipesan" sementara)
             if (cardTarget) {
                 cardTarget.setAttribute('data-stok', stokSisa - 1);
                 updateTampilanStok(namaProduk);
@@ -655,7 +645,6 @@
             const item = keranjang.find(i => i.nama === namaProduk);
             if (!item) return;
 
-            // Jika menambah jumlah, cek dulu sisa stok
             if (perubahan > 0) {
                 const cards = document.querySelectorAll('#productGrid .product-card');
                 let cardTarget = null;
@@ -673,7 +662,6 @@
                     updateTampilanStok(namaProduk);
                 }
             } else {
-                // Mengurangi jumlah -> kembalikan stok
                 const cards = document.querySelectorAll('#productGrid .product-card');
                 let cardTarget = null;
                 cards.forEach(card => {
@@ -697,7 +685,6 @@
         function hapusItem(namaProduk) {
             const item = keranjang.find(i => i.nama === namaProduk);
             if (item) {
-                // Kembalikan stok saat item dihapus dari keranjang
                 const cards = document.querySelectorAll('#productGrid .product-card');
                 let cardTarget = null;
                 cards.forEach(card => {
