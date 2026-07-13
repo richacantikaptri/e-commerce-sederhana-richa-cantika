@@ -65,6 +65,7 @@
         }
         .cart-item-info { flex: 1; }
         .cart-item-name { font-size: 14px; font-weight: 600; margin: 0 0 4px 0; }
+        .cart-item-size { font-size: 12px; color: #2f80ed; margin: 0 0 2px 0; font-weight: 600; }
         .cart-item-price { font-size: 13px; color: #777; margin: 0; }
 
         .cart-item-qty {
@@ -310,6 +311,29 @@
             background: #ccc !important;
             cursor: not-allowed;
         }
+
+        /* ===== TAMBAHAN: STYLE UNTUK PILIHAN UKURAN ===== */
+        .size-label {
+            font-size: 12px;
+            color: #555;
+            margin: 0 0 4px 0;
+            font-weight: 600;
+        }
+        .size-select {
+            width: 100%;
+            padding: 7px 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: inherit;
+            margin: 0 0 12px 0;
+            background: #fff;
+            cursor: pointer;
+        }
+        .size-select:focus {
+            outline: none;
+            border-color: #222;
+        }
     </style>
 </head>
 <body>
@@ -358,7 +382,14 @@
                     <p class="price">Rp 240.000</p>
                     <p class="product-desc">Tumbler warna pink lembut dengan desain minimalis, cocok untuk menemani aktivitas harian Anda.</p>
                     <p class="stock-info stok-aman" id="stok-minimalist-pink">Stok: 50</p>
-                    <button class="btn-add" id="btn-minimalist-pink" onclick="tambahKeKeranjang('Minimalist pink', 240000)">Tambah ke Keranjang</button>
+                    <p class="size-label">Pilih Ukuran:</p>
+                    <select class="size-select" id="ukuran-minimalist-pink">
+                        <option value="300ml">300 ml</option>
+                        <option value="500ml" selected>500 ml</option>
+                        <option value="700ml">700 ml</option>
+                        <option value="900ml">900 ml</option>
+                    </select>
+                    <button class="btn-add" id="btn-minimalist-pink" onclick="tambahKeKeranjang('Minimalist pink', 240000, 'minimalist-pink')">Tambah ke Keranjang</button>
                 </article>
 
                 <article class="product-card" data-kategori="sedotan" data-stok="60">
@@ -368,7 +399,14 @@
                     <p class="price">Rp 250.000</p>
                     <p class="product-desc">Warna hitam elegan dan netral, tampil klasik dan cocok untuk pria maupun wanita.</p>
                     <p class="stock-info stok-aman" id="stok-classic-black">Stok: 60</p>
-                    <button class="btn-add" id="btn-classic-black" onclick="tambahKeKeranjang('Classic black', 250000)">Tambah ke Keranjang</button>
+                    <p class="size-label">Pilih Ukuran:</p>
+                    <select class="size-select" id="ukuran-classic-black">
+                        <option value="300ml">300 ml</option>
+                        <option value="500ml" selected>500 ml</option>
+                        <option value="700ml">700 ml</option>
+                        <option value="900ml">900 ml</option>
+                    </select>
+                    <button class="btn-add" id="btn-classic-black" onclick="tambahKeKeranjang('Classic black', 250000, 'classic-black')">Tambah ke Keranjang</button>
                 </article>
 
                 <article class="product-card" data-kategori="sedotan" data-stok="35">
@@ -378,7 +416,14 @@
                     <p class="price">Rp 300.000</p>
                     <p class="product-desc">Desain putih bersih dan simpel, tampil rapi dan mudah dipadukan dengan gaya apapun.</p>
                     <p class="stock-info stok-aman" id="stok-minimalis-white">Stok: 35</p>
-                    <button class="btn-add" id="btn-minimalis-white" onclick="tambahKeKeranjang('minimalis white', 300000)">Tambah ke Keranjang</button>
+                    <p class="size-label">Pilih Ukuran:</p>
+                    <select class="size-select" id="ukuran-minimalis-white">
+                        <option value="300ml">300 ml</option>
+                        <option value="500ml" selected>500 ml</option>
+                        <option value="700ml">700 ml</option>
+                        <option value="900ml">900 ml</option>
+                    </select>
+                    <button class="btn-add" id="btn-minimalis-white" onclick="tambahKeKeranjang('minimalis white', 300000, 'minimalis-white')">Tambah ke Keranjang</button>
                 </article>
 
                 <article class="product-card" data-kategori="sedotan" data-stok="20">
@@ -388,7 +433,14 @@
                     <p class="price">Rp 160.000</p>
                     <p class="product-desc">Tumbler merah cerah dengan tampilan minimalis, memberi kesan energik dan berani.</p>
                     <p class="stock-info stok-menipis" id="stok-minimalis-red">Stok: 20</p>
-                    <button class="btn-add" id="btn-minimalis-red" onclick="tambahKeKeranjang('minimalis red', 160000)">Tambah ke Keranjang</button>
+                    <p class="size-label">Pilih Ukuran:</p>
+                    <select class="size-select" id="ukuran-minimalis-red">
+                        <option value="300ml">300 ml</option>
+                        <option value="500ml" selected>500 ml</option>
+                        <option value="700ml">700 ml</option>
+                        <option value="900ml">900 ml</option>
+                    </select>
+                    <button class="btn-add" id="btn-minimalis-red" onclick="tambahKeKeranjang('minimalis red', 160000, 'minimalis-red')">Tambah ke Keranjang</button>
                 </article>
 
                 <article class="product-card" data-kategori="biasa" data-stok="45">
@@ -398,7 +450,14 @@
                     <p class="price">Rp 150.000</p>
                     <p class="product-desc">Warna kuning lembut ala butter yang manis, cocok untuk menambah keceriaan harimu.</p>
                     <p class="stock-info stok-aman" id="stok-butter-bloom">Stok: 45</p>
-                    <button class="btn-add" id="btn-butter-bloom" onclick="tambahKeKeranjang('Butter Bloom', 150000)">Tambah ke Keranjang</button>
+                    <p class="size-label">Pilih Ukuran:</p>
+                    <select class="size-select" id="ukuran-butter-bloom">
+                        <option value="300ml">300 ml</option>
+                        <option value="500ml" selected>500 ml</option>
+                        <option value="700ml">700 ml</option>
+                        <option value="900ml">900 ml</option>
+                    </select>
+                    <button class="btn-add" id="btn-butter-bloom" onclick="tambahKeKeranjang('Butter Bloom', 150000, 'butter-bloom')">Tambah ke Keranjang</button>
                 </article>
 
                 <article class="product-card" data-kategori="biasa" data-stok="70">
@@ -408,7 +467,14 @@
                     <p class="price">Rp 150.000</p>
                     <p class="product-desc">Tumbler serbaguna untuk pemakaian sehari-hari, ringan dan praktis dibawa kemana saja.</p>
                     <p class="stock-info stok-aman" id="stok-tumbler-daily">Stok: 70</p>
-                    <button class="btn-add" id="btn-tumbler-daily" onclick="tambahKeKeranjang('Tumbler daily', 150000)">Tambah ke Keranjang</button>
+                    <p class="size-label">Pilih Ukuran:</p>
+                    <select class="size-select" id="ukuran-tumbler-daily">
+                        <option value="300ml">300 ml</option>
+                        <option value="500ml" selected>500 ml</option>
+                        <option value="700ml">700 ml</option>
+                        <option value="900ml">900 ml</option>
+                    </select>
+                    <button class="btn-add" id="btn-tumbler-daily" onclick="tambahKeKeranjang('Tumbler daily', 150000, 'tumbler-daily')">Tambah ke Keranjang</button>
                 </article>
 
                 <article class="product-card" data-kategori="biasa" data-stok="15">
@@ -418,7 +484,14 @@
                     <p class="price">Rp 250.000</p>
                     <p class="product-desc">Desain kekinian bergaya urban, pas untuk kamu yang aktif beraktivitas di kota.</p>
                     <p class="stock-info stok-menipis" id="stok-urban-bottle">Stok: 15</p>
-                    <button class="btn-add" id="btn-urban-bottle" onclick="tambahKeKeranjang('Urban Bottle', 250000)">Tambah ke Keranjang</button>
+                    <p class="size-label">Pilih Ukuran:</p>
+                    <select class="size-select" id="ukuran-urban-bottle">
+                        <option value="300ml">300 ml</option>
+                        <option value="500ml" selected>500 ml</option>
+                        <option value="700ml">700 ml</option>
+                        <option value="900ml">900 ml</option>
+                    </select>
+                    <button class="btn-add" id="btn-urban-bottle" onclick="tambahKeKeranjang('Urban Bottle', 250000, 'urban-bottle')">Tambah ke Keranjang</button>
                 </article>
 
                 <article class="product-card" data-kategori="sedotan" data-stok="55">
@@ -428,7 +501,14 @@
                     <p class="price">Rp 140.000</p>
                     <p class="product-desc">Bentuk ramping dan mengalir, nyaman digenggam dan ringan untuk dibawa bepergian.</p>
                     <p class="stock-info stok-aman" id="stok-flow-bottle">Stok: 55</p>
-                    <button class="btn-add" id="btn-flow-bottle" onclick="tambahKeKeranjang('Flow Bottle', 140000)">Tambah ke Keranjang</button>
+                    <p class="size-label">Pilih Ukuran:</p>
+                    <select class="size-select" id="ukuran-flow-bottle">
+                        <option value="300ml">300 ml</option>
+                        <option value="500ml" selected>500 ml</option>
+                        <option value="700ml">700 ml</option>
+                        <option value="900ml">900 ml</option>
+                    </select>
+                    <button class="btn-add" id="btn-flow-bottle" onclick="tambahKeKeranjang('Flow Bottle', 140000, 'flow-bottle')">Tambah ke Keranjang</button>
                 </article>
 
                 <article class="product-card" data-kategori="biasa" data-stok="40">
@@ -438,7 +518,14 @@
                     <p class="price">Rp 180.000</p>
                     <p class="product-desc">Warna segar seperti angin sepoi-sepoi, cocok untuk gaya hidup santai dan aktif.</p>
                     <p class="stock-info stok-aman" id="stok-breeze-bottle">Stok: 40</p>
-                    <button class="btn-add" id="btn-breeze-bottle" onclick="tambahKeKeranjang('Breeze Bottle', 180000)">Tambah ke Keranjang</button>
+                    <p class="size-label">Pilih Ukuran:</p>
+                    <select class="size-select" id="ukuran-breeze-bottle">
+                        <option value="300ml">300 ml</option>
+                        <option value="500ml" selected>500 ml</option>
+                        <option value="700ml">700 ml</option>
+                        <option value="900ml">900 ml</option>
+                    </select>
+                    <button class="btn-add" id="btn-breeze-bottle" onclick="tambahKeKeranjang('Breeze Bottle', 180000, 'breeze-bottle')">Tambah ke Keranjang</button>
                 </article>
 
                 <article class="product-card" data-kategori="biasa" data-stok="25">
@@ -448,7 +535,14 @@
                     <p class="price">Rp 150.000</p>
                     <p class="product-desc">Didesain untuk menemani aktivitas olahraga dan gerak aktif Anda sepanjang hari.</p>
                     <p class="stock-info stok-menipis" id="stok-motion-bottle">Stok: 25</p>
-                    <button class="btn-add" id="btn-motion-bottle" onclick="tambahKeKeranjang('Motion Bottle', 150000)">Tambah ke Keranjang</button>
+                    <p class="size-label">Pilih Ukuran:</p>
+                    <select class="size-select" id="ukuran-motion-bottle">
+                        <option value="300ml">300 ml</option>
+                        <option value="500ml" selected>500 ml</option>
+                        <option value="700ml">700 ml</option>
+                        <option value="900ml">900 ml</option>
+                    </select>
+                    <button class="btn-add" id="btn-motion-bottle" onclick="tambahKeKeranjang('Motion Bottle', 150000, 'motion-bottle')">Tambah ke Keranjang</button>
                 </article>
 
                 <article class="product-card" data-kategori="sedotan" data-stok="65">
@@ -458,7 +552,14 @@
                     <p class="price">Rp 200.000</p>
                     <p class="product-desc">Terinspirasi dari bulan, tampil lembut dan menenangkan dengan sentuhan warna manis.</p>
                     <p class="stock-info stok-aman" id="stok-luna-bottle">Stok: 65</p>
-                    <button class="btn-add" id="btn-luna-bottle" onclick="tambahKeKeranjang('Luna Bottle', 200000)">Tambah ke Keranjang</button>
+                    <p class="size-label">Pilih Ukuran:</p>
+                    <select class="size-select" id="ukuran-luna-bottle">
+                        <option value="300ml">300 ml</option>
+                        <option value="500ml" selected>500 ml</option>
+                        <option value="700ml">700 ml</option>
+                        <option value="900ml">900 ml</option>
+                    </select>
+                    <button class="btn-add" id="btn-luna-bottle" onclick="tambahKeKeranjang('Luna Bottle', 200000, 'luna-bottle')">Tambah ke Keranjang</button>
                 </article>
 
                 <article class="product-card" data-kategori="sedotan" data-stok="30">
@@ -468,7 +569,14 @@
                     <p class="price">Rp 300.000</p>
                     <p class="product-desc">Gradasi warna pink yang cantik, memberikan kesan feminin dan elegan.</p>
                     <p class="stock-info stok-menipis" id="stok-pink-gradient-bottle">Stok: 30</p>
-                    <button class="btn-add" id="btn-pink-gradient-bottle" onclick="tambahKeKeranjang('Pink Gradient Bottle', 300000)">Tambah ke Keranjang</button>
+                    <p class="size-label">Pilih Ukuran:</p>
+                    <select class="size-select" id="ukuran-pink-gradient-bottle">
+                        <option value="300ml">300 ml</option>
+                        <option value="500ml" selected>500 ml</option>
+                        <option value="700ml">700 ml</option>
+                        <option value="900ml">900 ml</option>
+                    </select>
+                    <button class="btn-add" id="btn-pink-gradient-bottle" onclick="tambahKeKeranjang('Pink Gradient Bottle', 300000, 'pink-gradient-bottle')">Tambah ke Keranjang</button>
                 </article>
 
                 <article class="product-card" data-kategori="biasa" data-stok="10">
@@ -478,7 +586,14 @@
                     <p class="price">Rp 280.000</p>
                     <p class="product-desc">Warna abu-abu netral dan modern, cocok untuk tampilan profesional maupun kasual.</p>
                     <p class="stock-info stok-menipis" id="stok-grey-series">Stok: 10</p>
-                    <button class="btn-add" id="btn-grey-series" onclick="tambahKeKeranjang('Grey Series', 280000)">Tambah ke Keranjang</button>
+                    <p class="size-label">Pilih Ukuran:</p>
+                    <select class="size-select" id="ukuran-grey-series">
+                        <option value="300ml">300 ml</option>
+                        <option value="500ml" selected>500 ml</option>
+                        <option value="700ml">700 ml</option>
+                        <option value="900ml">900 ml</option>
+                    </select>
+                    <button class="btn-add" id="btn-grey-series" onclick="tambahKeKeranjang('Grey Series', 280000, 'grey-series')">Tambah ke Keranjang</button>
                 </article>
 
                 <article class="product-card" data-kategori="sedotan" data-stok="0">
@@ -488,7 +603,14 @@
                     <p class="price">Rp 250.000</p>
                     <p class="product-desc">Tampilan mengilap dan berkilau, membuat tumbler ini tampak lebih premium dan menarik.</p>
                     <p class="stock-info stok-habis" id="stok-glow-bottle">Stok Habis</p>
-                    <button class="btn-add" id="btn-glow-bottle" onclick="tambahKeKeranjang('Glow Bottle', 250000)" disabled>Stok Habis</button>
+                    <p class="size-label">Pilih Ukuran:</p>
+                    <select class="size-select" id="ukuran-glow-bottle">
+                        <option value="300ml">300 ml</option>
+                        <option value="500ml" selected>500 ml</option>
+                        <option value="700ml">700 ml</option>
+                        <option value="900ml">900 ml</option>
+                    </select>
+                    <button class="btn-add" id="btn-glow-bottle" onclick="tambahKeKeranjang('Glow Bottle', 250000, 'glow-bottle')" disabled>Stok Habis</button>
                 </article>
 
             </div>
@@ -551,6 +673,20 @@
             'Glow Bottle': 'glow-bottle'
         };
 
+        /* ===================================================
+           TAMBAHAN: MAPPING BIAYA TAMBAHAN PER UKURAN
+           =================================================== */
+        const tambahanUkuran = {
+            '300ml': 0,
+            '500ml': 15000,
+            '700ml': 30000,
+            '900ml': 45000
+        };
+
+        function labelUkuran(ukuran) {
+            return ukuran.replace('ml', ' ml');
+        }
+
         function updateTampilanStok(namaProduk) {
             const cards = document.querySelectorAll('#productGrid .product-card');
             let cardTarget = null;
@@ -606,6 +742,7 @@
 
         /* ===================================================
            SISTEM KERANJANG & CHECKOUT
+           (Sekarang mendukung UKURAN: 300ml / 500ml / 700ml / 900ml)
            =================================================== */
 
         let keranjang = [];
@@ -614,7 +751,7 @@
             return "Rp " + angka.toLocaleString('id-ID');
         }
 
-        function tambahKeKeranjang(namaProduk, harga) {
+        function tambahKeKeranjang(namaProduk, hargaDasar, key) {
             const cards = document.querySelectorAll('#productGrid .product-card');
             let cardTarget = null;
             cards.forEach(card => {
@@ -623,18 +760,36 @@
             });
 
             const stokSisa = cardTarget ? parseInt(cardTarget.getAttribute('data-stok')) : 0;
-            const itemAda = keranjang.find(item => item.nama === namaProduk);
-            const jumlahDiKeranjang = itemAda ? itemAda.jumlah : 0;
 
-            if (stokSisa <= jumlahDiKeranjang) {
+            // ambil ukuran yang dipilih user pada produk ini
+            const selectUkuran = document.getElementById('ukuran-' + key);
+            const ukuran = selectUkuran ? selectUkuran.value : '500ml';
+            const hargaFinal = hargaDasar + (tambahanUkuran[ukuran] || 0);
+
+            // id unik: kombinasi nama produk + ukuran (agar ukuran berbeda jadi baris terpisah di keranjang)
+            const itemId = namaProduk + '||' + ukuran;
+
+            // total stok yang sudah diambil untuk produk ini (semua ukuran digabung, karena stok fisik sama)
+            const totalDiKeranjang = keranjang
+                .filter(item => item.nama === namaProduk)
+                .reduce((total, item) => total + item.jumlah, 0);
+
+            if (stokSisa <= totalDiKeranjang) {
                 alert('Maaf, stok "' + namaProduk + '" tidak mencukupi.');
                 return;
             }
 
+            const itemAda = keranjang.find(item => item.id === itemId);
             if (itemAda) {
                 itemAda.jumlah++;
             } else {
-                keranjang.push({ nama: namaProduk, harga: harga, jumlah: 1 });
+                keranjang.push({
+                    id: itemId,
+                    nama: namaProduk,
+                    ukuran: ukuran,
+                    harga: hargaFinal,
+                    jumlah: 1
+                });
             }
 
             if (cardTarget) {
@@ -646,17 +801,19 @@
             bukaKeranjang();
         }
 
-        function ubahJumlah(namaProduk, perubahan) {
-            const item = keranjang.find(i => i.nama === namaProduk);
+        function ubahJumlah(itemId, perubahan) {
+            const item = keranjang.find(i => i.id === itemId);
             if (!item) return;
 
+            const namaProduk = item.nama;
+            const cards = document.querySelectorAll('#productGrid .product-card');
+            let cardTarget = null;
+            cards.forEach(card => {
+                const judul = card.querySelector('h3').innerText.trim();
+                if (judul === namaProduk) cardTarget = card;
+            });
+
             if (perubahan > 0) {
-                const cards = document.querySelectorAll('#productGrid .product-card');
-                let cardTarget = null;
-                cards.forEach(card => {
-                    const judul = card.querySelector('h3').innerText.trim();
-                    if (judul === namaProduk) cardTarget = card;
-                });
                 const stokSisa = cardTarget ? parseInt(cardTarget.getAttribute('data-stok')) : 0;
                 if (stokSisa <= 0) {
                     alert('Stok "' + namaProduk + '" sudah habis.');
@@ -667,12 +824,6 @@
                     updateTampilanStok(namaProduk);
                 }
             } else {
-                const cards = document.querySelectorAll('#productGrid .product-card');
-                let cardTarget = null;
-                cards.forEach(card => {
-                    const judul = card.querySelector('h3').innerText.trim();
-                    if (judul === namaProduk) cardTarget = card;
-                });
                 if (cardTarget) {
                     const stokSisa = parseInt(cardTarget.getAttribute('data-stok'));
                     cardTarget.setAttribute('data-stok', stokSisa + 1);
@@ -682,27 +833,27 @@
 
             item.jumlah += perubahan;
             if (item.jumlah <= 0) {
-                keranjang = keranjang.filter(i => i.nama !== namaProduk);
+                keranjang = keranjang.filter(i => i.id !== itemId);
             }
             renderKeranjang();
         }
 
-        function hapusItem(namaProduk) {
-            const item = keranjang.find(i => i.nama === namaProduk);
+        function hapusItem(itemId) {
+            const item = keranjang.find(i => i.id === itemId);
             if (item) {
                 const cards = document.querySelectorAll('#productGrid .product-card');
                 let cardTarget = null;
                 cards.forEach(card => {
                     const judul = card.querySelector('h3').innerText.trim();
-                    if (judul === namaProduk) cardTarget = card;
+                    if (judul === item.nama) cardTarget = card;
                 });
                 if (cardTarget) {
                     const stokSisa = parseInt(cardTarget.getAttribute('data-stok'));
                     cardTarget.setAttribute('data-stok', stokSisa + item.jumlah);
-                    updateTampilanStok(namaProduk);
+                    updateTampilanStok(item.nama);
                 }
             }
-            keranjang = keranjang.filter(i => i.nama !== namaProduk);
+            keranjang = keranjang.filter(i => i.id !== itemId);
             renderKeranjang();
         }
 
@@ -728,14 +879,15 @@
                     <div class="cart-item">
                         <div class="cart-item-info">
                             <p class="cart-item-name">${item.nama}</p>
+                            <p class="cart-item-size">Ukuran: ${labelUkuran(item.ukuran)}</p>
                             <p class="cart-item-price">${formatRupiah(item.harga)}</p>
                         </div>
                         <div class="cart-item-qty">
-                            <button class="qty-btn" onclick="ubahJumlah('${item.nama}', -1)">-</button>
+                            <button class="qty-btn" onclick="ubahJumlah('${item.id}', -1)">-</button>
                             <span class="qty-value">${item.jumlah}</span>
-                            <button class="qty-btn" onclick="ubahJumlah('${item.nama}', 1)">+</button>
+                            <button class="qty-btn" onclick="ubahJumlah('${item.id}', 1)">+</button>
                         </div>
-                        <button class="cart-item-remove" onclick="hapusItem('${item.nama}')">Hapus</button>
+                        <button class="cart-item-remove" onclick="hapusItem('${item.id}')">Hapus</button>
                     </div>
                 `).join('');
                 btnCheckout.disabled = false;
@@ -784,7 +936,7 @@
                 <div class="checkout-summary">
                     ${keranjang.map(item => `
                         <div class="checkout-summary-row">
-                            <span>${item.nama} x${item.jumlah}</span>
+                            <span>${item.nama} (${labelUkuran(item.ukuran)}) x${item.jumlah}</span>
                             <span>${formatRupiah(item.harga * item.jumlah)}</span>
                         </div>
                     `).join('')}
