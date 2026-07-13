@@ -276,11 +276,16 @@
             display: inline-block;
             font-size: 11px;
             color: #fff;
-            background: #999;
             padding: 2px 9px;
             border-radius: 10px;
             margin-bottom: 6px;
             text-transform: capitalize;
+        }
+        .category-tag.tag-sedotan {
+            background: #2f80ed;
+        }
+        .category-tag.tag-biasa {
+            background: #999;
         }
         .no-product-msg {
             text-align: center;
@@ -346,9 +351,9 @@
 
             <div class="product-grid" id="productGrid">
 
-                <article class="product-card" data-kategori="biasa" data-stok="50">
+                <article class="product-card" data-kategori="sedotan" data-stok="50">
                     <img src="pink.jpeg" alt="Minimalist pink">
-                    <span class="category-tag">Tumbler Biasa</span>
+                    <span class="category-tag tag-sedotan">Tumbler Sedotan</span>
                     <h3>Minimalist pink</h3>
                     <p class="price">Rp 240.000</p>
                     <p class="product-desc">Tumbler warna pink lembut dengan desain minimalis, cocok untuk menemani aktivitas harian Anda.</p>
@@ -356,9 +361,9 @@
                     <button class="btn-add" id="btn-minimalist-pink" onclick="tambahKeKeranjang('Minimalist pink', 240000)">Tambah ke Keranjang</button>
                 </article>
 
-                <article class="product-card" data-kategori="biasa" data-stok="60">
+                <article class="product-card" data-kategori="sedotan" data-stok="60">
                     <img src="black.jpeg" alt="classic black">
-                    <span class="category-tag">Tumbler Biasa</span>
+                    <span class="category-tag tag-sedotan">Tumbler Sedotan</span>
                     <h3>Classic black</h3>
                     <p class="price">Rp 250.000</p>
                     <p class="product-desc">Warna hitam elegan dan netral, tampil klasik dan cocok untuk pria maupun wanita.</p>
@@ -366,9 +371,9 @@
                     <button class="btn-add" id="btn-classic-black" onclick="tambahKeKeranjang('Classic black', 250000)">Tambah ke Keranjang</button>
                 </article>
 
-                <article class="product-card" data-kategori="biasa" data-stok="35">
+                <article class="product-card" data-kategori="sedotan" data-stok="35">
                     <img src="white.jpeg" alt="Minimalis white">
-                    <span class="category-tag">Tumbler Biasa</span>
+                    <span class="category-tag tag-sedotan">Tumbler Sedotan</span>
                     <h3>Minimalis white</h3>
                     <p class="price">Rp 300.000</p>
                     <p class="product-desc">Desain putih bersih dan simpel, tampil rapi dan mudah dipadukan dengan gaya apapun.</p>
@@ -376,9 +381,9 @@
                     <button class="btn-add" id="btn-minimalis-white" onclick="tambahKeKeranjang('minimalis white', 300000)">Tambah ke Keranjang</button>
                 </article>
 
-                <article class="product-card" data-kategori="biasa" data-stok="20">
+                <article class="product-card" data-kategori="sedotan" data-stok="20">
                     <img src="red.jpeg" alt="red">
-                    <span class="category-tag">Tumbler Biasa</span>
+                    <span class="category-tag tag-sedotan">Tumbler Sedotan</span>
                     <h3>minimalis red</h3>
                     <p class="price">Rp 160.000</p>
                     <p class="product-desc">Tumbler merah cerah dengan tampilan minimalis, memberi kesan energik dan berani.</p>
@@ -388,7 +393,7 @@
 
                 <article class="product-card" data-kategori="biasa" data-stok="45">
                     <img src="Butter Bloom.jpeg" alt="Butter Bloom">
-                    <span class="category-tag">Tumbler Biasa</span>
+                    <span class="category-tag tag-biasa">Tumbler Biasa</span>
                     <h3>Butter Bloom</h3>
                     <p class="price">Rp 150.000</p>
                     <p class="product-desc">Warna kuning lembut ala butter yang manis, cocok untuk menambah keceriaan harimu.</p>
@@ -396,9 +401,9 @@
                     <button class="btn-add" id="btn-butter-bloom" onclick="tambahKeKeranjang('Butter Bloom', 150000)">Tambah ke Keranjang</button>
                 </article>
 
-                <article class="product-card" data-kategori="sedotan" data-stok="70">
+                <article class="product-card" data-kategori="biasa" data-stok="70">
                     <img src="Tumbler daily.jpeg" alt="Tumbler daily">
-                    <span class="category-tag">Tumbler Sedotan</span>
+                    <span class="category-tag tag-biasa">Tumbler Biasa</span>
                     <h3>Tumbler daily</h3>
                     <p class="price">Rp 150.000</p>
                     <p class="product-desc">Tumbler serbaguna untuk pemakaian sehari-hari, ringan dan praktis dibawa kemana saja.</p>
@@ -408,7 +413,7 @@
 
                 <article class="product-card" data-kategori="biasa" data-stok="15">
                     <img src="Urban Bottle.jpeg" alt="Urban Bottle">
-                    <span class="category-tag">Tumbler Biasa</span>
+                    <span class="category-tag tag-biasa">Tumbler Biasa</span>
                     <h3>Urban Bottle</h3>
                     <p class="price">Rp 250.000</p>
                     <p class="product-desc">Desain kekinian bergaya urban, pas untuk kamu yang aktif beraktivitas di kota.</p>
@@ -418,7 +423,7 @@
 
                 <article class="product-card" data-kategori="sedotan" data-stok="55">
                     <img src="Flow Bottle.jpeg" alt="Flow Bottle">
-                    <span class="category-tag">Tumbler Sedotan</span>
+                    <span class="category-tag tag-sedotan">Tumbler Sedotan</span>
                     <h3>Flow Bottle</h3>
                     <p class="price">Rp 140.000</p>
                     <p class="product-desc">Bentuk ramping dan mengalir, nyaman digenggam dan ringan untuk dibawa bepergian.</p>
@@ -428,7 +433,7 @@
 
                 <article class="product-card" data-kategori="biasa" data-stok="40">
                     <img src="Breeze Bottle.jpeg" alt="Breeze Bottle">
-                    <span class="category-tag">Tumbler Biasa</span>
+                    <span class="category-tag tag-biasa">Tumbler Biasa</span>
                     <h3>Breeze Bottle</h3>
                     <p class="price">Rp 180.000</p>
                     <p class="product-desc">Warna segar seperti angin sepoi-sepoi, cocok untuk gaya hidup santai dan aktif.</p>
@@ -436,9 +441,9 @@
                     <button class="btn-add" id="btn-breeze-bottle" onclick="tambahKeKeranjang('Breeze Bottle', 180000)">Tambah ke Keranjang</button>
                 </article>
 
-                <article class="product-card" data-kategori="sedotan" data-stok="25">
+                <article class="product-card" data-kategori="biasa" data-stok="25">
                     <img src="Motion Bottle.jpeg" alt="Motion Bottle">
-                    <span class="category-tag">Tumbler Sedotan</span>
+                    <span class="category-tag tag-biasa">Tumbler Biasa</span>
                     <h3>Motion Bottle</h3>
                     <p class="price">Rp 150.000</p>
                     <p class="product-desc">Didesain untuk menemani aktivitas olahraga dan gerak aktif Anda sepanjang hari.</p>
@@ -446,9 +451,9 @@
                     <button class="btn-add" id="btn-motion-bottle" onclick="tambahKeKeranjang('Motion Bottle', 150000)">Tambah ke Keranjang</button>
                 </article>
 
-                <article class="product-card" data-kategori="biasa" data-stok="65">
+                <article class="product-card" data-kategori="sedotan" data-stok="65">
                     <img src="Luna Bottle.jpeg" alt="Luna Bottle">
-                    <span class="category-tag">Tumbler Biasa</span>
+                    <span class="category-tag tag-sedotan">Tumbler Sedotan</span>
                     <h3>Luna Bottle</h3>
                     <p class="price">Rp 200.000</p>
                     <p class="product-desc">Terinspirasi dari bulan, tampil lembut dan menenangkan dengan sentuhan warna manis.</p>
@@ -456,9 +461,9 @@
                     <button class="btn-add" id="btn-luna-bottle" onclick="tambahKeKeranjang('Luna Bottle', 200000)">Tambah ke Keranjang</button>
                 </article>
 
-                <article class="product-card" data-kategori="biasa" data-stok="30">
+                <article class="product-card" data-kategori="sedotan" data-stok="30">
                     <img src="Pink Gradient Bottle.jpeg" alt="Pink Gradient Bottle">
-                    <span class="category-tag">Tumbler Biasa</span>
+                    <span class="category-tag tag-sedotan">Tumbler Sedotan</span>
                     <h3>Pink Gradient Bottle</h3>
                     <p class="price">Rp 300.000</p>
                     <p class="product-desc">Gradasi warna pink yang cantik, memberikan kesan feminin dan elegan.</p>
@@ -468,7 +473,7 @@
 
                 <article class="product-card" data-kategori="biasa" data-stok="10">
                     <img src="Grey Series.jpeg" alt="Grey Series">
-                    <span class="category-tag">Tumbler Biasa</span>
+                    <span class="category-tag tag-biasa">Tumbler Biasa</span>
                     <h3>Grey Series</h3>
                     <p class="price">Rp 280.000</p>
                     <p class="product-desc">Warna abu-abu netral dan modern, cocok untuk tampilan profesional maupun kasual.</p>
@@ -476,9 +481,9 @@
                     <button class="btn-add" id="btn-grey-series" onclick="tambahKeKeranjang('Grey Series', 280000)">Tambah ke Keranjang</button>
                 </article>
 
-                <article class="product-card" data-kategori="biasa" data-stok="0">
+                <article class="product-card" data-kategori="sedotan" data-stok="0">
                     <img src="Glow Bottle.jpeg" alt="Glow Bottle">
-                    <span class="category-tag">Tumbler Biasa</span>
+                    <span class="category-tag tag-sedotan">Tumbler Sedotan</span>
                     <h3>Glow Bottle </h3>
                     <p class="price">Rp 250.000</p>
                     <p class="product-desc">Tampilan mengilap dan berkilau, membuat tumbler ini tampak lebih premium dan menarik.</p>
