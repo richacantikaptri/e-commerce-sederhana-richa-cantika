@@ -355,6 +355,138 @@
             outline: none;
             border-color: #222;
         }
+
+        /* ===== TAMBAHAN: STYLE UNTUK MODAL DETAIL PRODUK ===== */
+        .product-card img,
+        .product-card h3 {
+            cursor: pointer;
+        }
+
+        .detail-modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .detail-modal-overlay.open { display: flex; }
+
+        .detail-modal {
+            background: #fff;
+            width: 640px;
+            max-width: 100%;
+            max-height: 88vh;
+            overflow-y: auto;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+        }
+
+        .detail-modal-close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 20px;
+            line-height: 1;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .detail-modal-body {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .detail-modal-image {
+            flex: 1 1 260px;
+            min-width: 240px;
+        }
+        .detail-modal-image img {
+            width: 100%;
+            height: 100%;
+            min-height: 260px;
+            object-fit: cover;
+            display: block;
+            border-radius: 12px 0 0 12px;
+        }
+
+        .detail-modal-info {
+            flex: 1 1 300px;
+            padding: 24px;
+            box-sizing: border-box;
+        }
+
+        .detail-modal-info h2 {
+            margin: 6px 0 8px 0;
+            font-size: 20px;
+        }
+
+        .detail-modal-price {
+            font-size: 18px;
+            font-weight: 600;
+            color: #222;
+            margin: 0 0 10px 0;
+        }
+
+        .detail-modal-desc {
+            font-size: 13.5px;
+            color: #666;
+            line-height: 1.6;
+            margin: 0 0 14px 0;
+        }
+
+        .detail-qty-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 0 18px 0;
+        }
+        .detail-qty-wrapper .qty-btn {
+            width: 30px;
+            height: 30px;
+        }
+        .detail-qty-value {
+            min-width: 22px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .detail-modal-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-detail-add {
+            flex: 1;
+            padding: 12px;
+            background: #222;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        .btn-detail-add:hover { background: #444; }
+        .btn-detail-add:disabled { background: #ccc; cursor: not-allowed; }
+
+        @media (max-width: 560px) {
+            .detail-modal-image img {
+                border-radius: 12px 12px 0 0;
+                min-height: 200px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -674,6 +806,13 @@
     <!-- ===== MODAL CHECKOUT ===== -->
     <div class="checkout-modal-overlay" id="checkoutOverlay">
         <div class="checkout-modal" id="checkoutModalContent">
+            <!-- Diisi otomatis oleh JavaScript -->
+        </div>
+    </div>
+
+    <!-- ===== TAMBAHAN: MODAL DETAIL PRODUK ===== -->
+    <div class="detail-modal-overlay" id="detailModalOverlay" onclick="if(event.target===this) tutupDetailProduk()">
+        <div class="detail-modal" id="detailModalContent">
             <!-- Diisi otomatis oleh JavaScript -->
         </div>
     </div>
@@ -1053,6 +1192,181 @@
         function selesaiCheckout() {
             tutupCheckout();
             tutupKeranjang();
+        }
+    </script>
+
+    <!-- ===== TAMBAHAN: SCRIPT UNTUK MODAL DETAIL PRODUK ===== -->
+    <script>
+        /* ===================================================
+           TAMBAHAN: MAPPING HARGA DASAR PER PRODUK
+           (dipakai khusus oleh modal detail produk)
+           =================================================== */
+        const hargaDasarProduk = {
+            'Minimalist pink': 240000,
+            'Classic black': 250000,
+            'minimalis white': 300000,
+            'minimalis red': 160000,
+            'Butter Bloom': 150000,
+            'Tumbler daily': 150000,
+            'Urban Bottle': 250000,
+            'Flow Bottle': 140000,
+            'Breeze Bottle': 180000,
+            'Motion Bottle': 150000,
+            'Luna Bottle': 200000,
+            'Pink Gradient Bottle': 300000,
+            'Grey Series': 280000,
+            'Glow Bottle': 250000
+        };
+
+        // Pasang event klik pada gambar & judul setiap produk untuk membuka detail
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('#productGrid .product-card').forEach(function (card) {
+                const judulEl = card.querySelector('h3');
+                const imgEl = card.querySelector('img');
+                if (!judulEl) return;
+                const namaProduk = judulEl.innerText.trim();
+
+                if (imgEl) {
+                    imgEl.addEventListener('click', function () {
+                        bukaDetailProduk(namaProduk);
+                    });
+                }
+                judulEl.addEventListener('click', function () {
+                    bukaDetailProduk(namaProduk);
+                });
+            });
+        });
+
+        function cariCardProduk(namaProduk) {
+            const cards = document.querySelectorAll('#productGrid .product-card');
+            let cardTarget = null;
+            cards.forEach(function (card) {
+                const judul = card.querySelector('h3').innerText.trim();
+                if (judul === namaProduk) cardTarget = card;
+            });
+            return cardTarget;
+        }
+
+        function bukaDetailProduk(namaProduk) {
+            const card = cariCardProduk(namaProduk);
+            if (!card) return;
+
+            const key = stokElementId[namaProduk];
+            const hargaDasar = hargaDasarProduk[namaProduk];
+            const imgSrc = card.querySelector('img').getAttribute('src');
+            const tagEl = card.querySelector('.category-tag');
+            const tagText = tagEl ? tagEl.innerText : '';
+            const tagClass = tagEl && tagEl.classList.contains('tag-sedotan') ? 'tag-sedotan' : 'tag-biasa';
+            const desc = card.querySelector('.product-desc') ? card.querySelector('.product-desc').innerText : '';
+            const stokSisa = parseInt(card.getAttribute('data-stok'));
+            const stokHabis = stokSisa <= 0;
+
+            let opsiUkuran = '';
+            card.querySelectorAll('.size-select option').forEach(function (opt) {
+                opsiUkuran += '<option value="' + opt.value + '"' + (opt.selected ? ' selected' : '') + '>' + opt.innerText + '</option>';
+            });
+
+            const modal = document.getElementById('detailModalContent');
+            modal.innerHTML = `
+                <button class="detail-modal-close" onclick="tutupDetailProduk()">&times;</button>
+                <div class="detail-modal-body">
+                    <div class="detail-modal-image">
+                        <img src="${imgSrc}" alt="${namaProduk}">
+                    </div>
+                    <div class="detail-modal-info">
+                        <span class="category-tag ${tagClass}">${tagText}</span>
+                        <h2>${namaProduk}</h2>
+                        <p class="detail-modal-price" id="detailHargaTampil">${formatRupiah(hargaDasar)}</p>
+                        <p class="detail-modal-desc">${desc}</p>
+                        <p class="stock-info ${stokHabis ? 'stok-habis' : (stokSisa <= 20 ? 'stok-menipis' : 'stok-aman')}" id="detailStokTampil">
+                            ${stokHabis ? 'Stok Habis' : 'Stok: ' + stokSisa}
+                        </p>
+                        <p class="size-label">Pilih Ukuran:</p>
+                        <select class="size-select" id="detailUkuran" onchange="updateHargaDetail(${hargaDasar})">
+                            ${opsiUkuran}
+                        </select>
+                        <p class="size-label">Jumlah:</p>
+                        <div class="detail-qty-wrapper">
+                            <button class="qty-btn" onclick="ubahJumlahDetail(-1, ${stokSisa})" ${stokHabis ? 'disabled' : ''}>-</button>
+                            <span class="detail-qty-value" id="detailQtyValue">1</span>
+                            <button class="qty-btn" onclick="ubahJumlahDetail(1, ${stokSisa})" ${stokHabis ? 'disabled' : ''}>+</button>
+                        </div>
+                        <div class="detail-modal-actions">
+                            <button class="btn-detail-add" id="btnDetailAdd" onclick="tambahKeKeranjangDariDetail('${namaProduk.replace(/'/g, "\\'")}', ${hargaDasar}, '${key}')" ${stokHabis ? 'disabled' : ''}>
+                                ${stokHabis ? 'Stok Habis' : 'Tambah ke Keranjang'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('detailModalOverlay').classList.add('open');
+        }
+
+        function updateHargaDetail(hargaDasar) {
+            const ukuranEl = document.getElementById('detailUkuran');
+            const ukuran = ukuranEl ? ukuranEl.value : '500ml';
+            const hargaFinal = hargaDasar + (tambahanUkuran[ukuran] || 0);
+            const tampilHarga = document.getElementById('detailHargaTampil');
+            if (tampilHarga) tampilHarga.innerText = formatRupiah(hargaFinal);
+        }
+
+        function ubahJumlahDetail(perubahan, stokMax) {
+            const qtyEl = document.getElementById('detailQtyValue');
+            if (!qtyEl) return;
+            let qty = parseInt(qtyEl.innerText) + perubahan;
+            if (qty < 1) qty = 1;
+            if (qty > stokMax) {
+                alert('Jumlah melebihi stok yang tersedia.');
+                qty = stokMax;
+            }
+            qtyEl.innerText = qty;
+        }
+
+        function tambahKeKeranjangDariDetail(namaProduk, hargaDasar, key) {
+            const card = cariCardProduk(namaProduk);
+            if (!card) return;
+
+            const stokSisa = parseInt(card.getAttribute('data-stok'));
+            const ukuranEl = document.getElementById('detailUkuran');
+            const ukuran = ukuranEl ? ukuranEl.value : '500ml';
+            const qtyEl = document.getElementById('detailQtyValue');
+            const qty = qtyEl ? parseInt(qtyEl.innerText) : 1;
+            const hargaFinal = hargaDasar + (tambahanUkuran[ukuran] || 0);
+
+            const totalDiKeranjang = keranjang
+                .filter(item => item.nama === namaProduk)
+                .reduce((total, item) => total + item.jumlah, 0);
+
+            if (stokSisa - totalDiKeranjang < qty) {
+                alert('Maaf, stok "' + namaProduk + '" tidak mencukupi.');
+                return;
+            }
+
+            const itemId = namaProduk + '||' + ukuran;
+            const itemAda = keranjang.find(item => item.id === itemId);
+            if (itemAda) {
+                itemAda.jumlah += qty;
+            } else {
+                keranjang.push({
+                    id: itemId,
+                    nama: namaProduk,
+                    ukuran: ukuran,
+                    harga: hargaFinal,
+                    jumlah: qty
+                });
+            }
+
+            card.setAttribute('data-stok', stokSisa - qty);
+            updateTampilanStok(namaProduk);
+
+            renderKeranjang();
+            tutupDetailProduk();
+            bukaKeranjang();
+        }
+
+        function tutupDetailProduk() {
+            document.getElementById('detailModalOverlay').classList.remove('open');
         }
     </script>
 
